@@ -6,7 +6,7 @@ const app = express();
 //et renvoie un objet contenant les données de ces corps de requête sous forme de paires clé-valeur.
 //Lorsque l'option extended est définie sur true, l'analyseur permet d'analyser les données envoyées sous forme de tableaux et d'objets 
 app.use(bodyParser.urlencoded({extended: true}));
-
+//home Route:
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/index.html');
 })
@@ -19,6 +19,18 @@ app.post('/', function(req, res){
     let result = num1 + num2;
 
     res.send('The result of the calculation is ' + result);
+})
+
+app.get("/bmicalculator", function(req, res) {
+    res.sendFile(__dirname + "/bmicalculator.html");
+})
+app.post("/bmicalculator", function(req, res) {
+   let weight = parseFloat(req.body.weight);
+   let height = parseFloat(req.body.height);
+
+   let bmi = weight / (height * weight);
+
+   res.send('Your BMI is ' + bmi);
 })
 
 
